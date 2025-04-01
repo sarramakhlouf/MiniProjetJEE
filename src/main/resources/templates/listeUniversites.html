@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Liste des Universités</title>
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+</head>
+<body>
+	<div th:replace="template"></div>
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                Liste des Universités
+            </div>
+            <div class="card-body">
+                <table class="table table-striped">
+                    <tr>
+                        <th>ID</th>
+						<th>Nom Université</th>
+						<th>Adresse Université</th>
+						<th>Email Université</th>
+						<th>Nombre des étudiants</th>
+						<th>Date Création</th>
+						<th>Suppression</th>
+						<th>Edition</th>
+                    </tr>
+                    <tr th:each="u:${universites.content}">
+                        <td th:text="${u.idUniversite}"></td>
+                        <td th:text="${u.nomUniversite}"></td>
+						<td th:text="${u.adresseUniversite}"></td>
+						<td th:text="${u.email}"></td>
+						<td th:text="${u.nbEtudiants}"></td>
+                        <td th:text="${#dates.format(u.dateCreation, 'yyyy-MM-dd')}"></td>
+						<td>
+						   <a class="btn btn-danger" onclick="return confirm('Etes-vous sûr ?')"
+						   	th:href="@{/supprimerUniversite(id=${u.idUniversite}, page=${currentPage}, size=${size})}">
+						     Supprimer
+						   </a>
+						</td>
+						<td>
+						  <a class="btn btn-success"
+						   th:href="@{/modifierUniversite(id=${u.idUniversite})}">
+						    Editer
+						  </a>
+						</td>
+					</tr>
+                </table>
+				<ul class="nav nav-pills">
+					<li th:each="page,status:${pages}">
+						<a th:class="${status.index==currentPage?'btn btn-primary':'btn' }"
+							th:href="@{ ListeUniversites(page=${status.index}, size=${size} ) }" th:text="${status.index }"></a>
+					</li>
+				</ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
