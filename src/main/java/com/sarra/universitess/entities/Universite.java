@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Universite {
@@ -19,6 +20,10 @@ public class Universite {
 	private Double nbEtudiants;
 	private Date dateCreation;
 	
+	@ManyToOne
+	private Domaine domaine;
+
+
 	public Universite() {
 		super();
 	}
@@ -79,6 +84,14 @@ public class Universite {
 
 	public void setDateCreation(Date dateCreation) {
 		this.dateCreation = dateCreation;
+	}
+	
+	public Domaine getDomaine() {
+		return domaine;
+	}
+
+	public void setDomaine(Domaine domaine) {
+		this.domaine = domaine;
 	}
 
 	@Override
