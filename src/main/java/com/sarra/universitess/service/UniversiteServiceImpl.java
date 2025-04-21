@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 
 import com.sarra.universitess.entities.Domaine;
 import com.sarra.universitess.entities.Universite;
+import com.sarra.universitess.repos.DomaineRepository;
 import com.sarra.universitess.repos.UniversiteRepository;
 
 @Service
@@ -16,6 +17,10 @@ public class UniversiteServiceImpl implements UniversiteService {
 
     @Autowired
     private UniversiteRepository universiteRepository;
+    
+    @Autowired
+    DomaineRepository domaineRepository;
+
 
     @Override
     public Universite saveUniversite(Universite u) {
@@ -86,5 +91,16 @@ public class UniversiteServiceImpl implements UniversiteService {
 	public List<Universite> trierUniversitesNomNbEtudiants() {
 	    return universiteRepository.trierUniversitesNomNbEtudiants();
 	}
+	
+	@Override
+	public List<Domaine> getAllDomaines() {
+		return domaineRepository.findAll();
+	}
+	
+	@Override
+    public Domaine saveDomaine(Domaine d) {
+        return domaineRepository.save(d);
+    }
+
 
 }

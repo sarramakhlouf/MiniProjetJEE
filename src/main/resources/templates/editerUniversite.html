@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<link rel="stylesheet" type="text/css"
+      href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+<head>
+    <meta charset="utf-8">
+    <title>Modifier Université</title>
+</head>
+<body>
+<div th:replace="template"></div>
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header">
+            Modifier une Université
+        </div>
+        <div class="card-body">
+            <form th:action="@{/saveUniversite}" method="post">
+				<div class="form-group">
+					<label class="control-label" hidden>ID Produit :</label>
+				 	<input type="hidden" name="idUniversite" class="form-control"
+						   th:value="${universite.idUniversite}" />
+				</div>
+                <div class="form-group">
+                    <label>Nom Université :</label>
+                    <input type="text" name="nomUniversite" class="form-control"
+                           th:value="${universite.nomUniversite}" />
+                    <span th:errors="${universite.nomUniversite}" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label>Adresse :</label>
+                    <input type="text" name="adresseUniversite" class="form-control"
+                           th:value="${universite.adresseUniversite}" />
+                    <span th:errors="${universite.adresseUniversite}" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label>Email :</label>
+                    <input type="email" name="email" class="form-control"
+                           th:value="${universite.email}" />
+                    <span th:errors="${universite.email}" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label>Nombre d'étudiants :</label>
+                    <input type="number" step="0.01" name="nbEtudiants" class="form-control"
+                           th:value="${universite.nbEtudiants}" />
+                    <span th:errors="${universite.nbEtudiants}" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label>Date de création :</label>
+                    <input type="date" name="dateCreation" class="form-control"
+                           th:value="${#dates.format(universite.dateCreation, 'yyyy-MM-dd')}" />
+                    <span th:errors="${universite.dateCreation}" class="text-danger"></span>
+                </div>
+				<div>
+					<button type="submit" class="btn btn-primary">Valider</button>
+				</div>
+
+                <!--<div class="form-group">
+                    <label>Domaine :</label>
+                    <select name="domaine.idDom" class="form-control">
+                        <option th:each="dom : ${domaines}"
+                                th:value="${dom.idDom}"
+                                th:text="${dom.nomDom}"
+                                th:selected="${universite.domaine != null} ? ${dom.idDom} == ${universite.domaine.idDom} : false">
+                        </option>
+                    </select>
+                    <span th:errors="${universite.domaine}" class="text-danger"></span>
+                </div>-->
+
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

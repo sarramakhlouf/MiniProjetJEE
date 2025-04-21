@@ -22,6 +22,7 @@ public interface UniversiteService {
     List<Universite> findByDomaineIdDom(Long id);
 	List<Universite> findByOrderByNomUniversiteAsc();
 	List<Universite> trierUniversitesNomNbEtudiants();
-	
-	
+	List<Domaine> getAllDomaines();
+	Domaine saveDomaine(Domaine d);
+		
 }

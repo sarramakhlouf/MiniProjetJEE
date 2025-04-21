@@ -19,10 +19,16 @@ public class Domaine {
 	private String descriptionDom;
 	
 	@OneToMany(mappedBy = "domaine")
-	 @JsonIgnore
+	@JsonIgnore
 	private List<Universite> universites;
 
 	public Domaine() {}
+
+	public Domaine(String nomDom, String descriptionDom) {
+		super();
+		this.nomDom = nomDom;
+		this.descriptionDom = descriptionDom;
+	}
 
 	public Domaine(String nomDom, String descriptionDom, List<Universite> universites) {
 		super();
