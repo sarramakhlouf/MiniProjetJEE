@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 
+import com.sarra.universitess.dto.UniversiteDTO;
 import com.sarra.universitess.entities.Domaine;
 import com.sarra.universitess.entities.Universite;
 import com.sarra.universitess.repos.UniversiteRepository;

@@ -4,16 +4,20 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 
+import com.sarra.universitess.dto.UniversiteDTO;
 import com.sarra.universitess.entities.Domaine;
 import com.sarra.universitess.entities.Universite;
 
 public interface UniversiteService {
-	Universite saveUniversite(Universite u);
-    Universite updateUniversite(Universite u);
+	
+	UniversiteDTO saveUniversite(UniversiteDTO u);
+	UniversiteDTO getUniversite(Long id);
+	List<UniversiteDTO> getAllUniversites();
+    UniversiteDTO updateUniversite(UniversiteDTO u);
+    
     void deleteUniversite(Universite u);
     void deleteUniversiteById(Long id);
-    Universite getUniversite(Long id);
-    List<Universite> getAllUniversites();
+    
     Page<Universite> getAllUniversitesParPage(int page, int size);
     List<Universite> findByNomUniversite(String nom);
     List<Universite> findByNomUniversiteContains(String nom);
@@ -24,5 +28,7 @@ public interface UniversiteService {
 	List<Universite> trierUniversitesNomNbEtudiants();
 	List<Domaine> getAllDomaines();
 	Domaine saveDomaine(Domaine d);
-		
+	 
+	UniversiteDTO convertEntityToDto (Universite universite);
+	Universite convertDtoToEntity(UniversiteDTO universiteDto);	
 }

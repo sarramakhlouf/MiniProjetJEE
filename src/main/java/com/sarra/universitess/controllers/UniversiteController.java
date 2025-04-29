@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.data.domain.Page;
 
+import com.sarra.universitess.dto.UniversiteDTO;
 import com.sarra.universitess.entities.Domaine;
 import com.sarra.universitess.entities.Universite;
 import com.sarra.universitess.service.UniversiteService;
@@ -55,7 +56,7 @@ public class UniversiteController {
     }
 
     @RequestMapping("/saveUniversite")
-    public String saveUniversite(@Valid Universite universite, BindingResult bindingResult,
+    public String saveUniversite(@Valid UniversiteDTO universite, BindingResult bindingResult,
     						@RequestParam (name="page",defaultValue = "0") int page,
     						@RequestParam (name="size",defaultValue = "2") int size)
     {
@@ -63,16 +64,16 @@ public class UniversiteController {
     	boolean isNew = false;
     	if (bindingResult.hasErrors()) return "formUniversite";
     	
-    	if (universite.getIdUniversite()==null) //ajout
+    	if (universite.getIdUniversite()==null) 
     		isNew=true;
 
 	    universiteService.saveUniversite(universite);
-	    if (isNew) //ajout
+	    if (isNew) 
 	    {
 	    	Page<Universite> unis = universiteService.getAllUniversitesParPage(page, size);
 	    	currentPage = unis.getTotalPages()-1;
 	    }
-	    else //modif
+	    else 
 	    currentPage=page;
 
 	    return ("redirect:/ListeUniversites?page="+currentPage+"&size="+size);
@@ -101,7 +102,7 @@ public class UniversiteController {
     		@RequestParam(name="page", defaultValue = "0") int page,
             @RequestParam(name="size", defaultValue = "2") int size) 
     {
-        Universite u = universiteService.getUniversite(id);
+        UniversiteDTO u = universiteService.getUniversite(id);
         List<Domaine> doms = universiteService.getAllDomaines();
         modelMap.addAttribute("universite", u);
         modelMap.addAttribute("mode", "edit");
@@ -112,19 +113,19 @@ public class UniversiteController {
     }
 
     @RequestMapping("/updateUniversite")
-    public String updateUniversite(@ModelAttribute("universite") Universite universite,
+    public String updateUniversite(@ModelAttribute("universite") UniversiteDTO universiteDTO,
                                    @RequestParam("date") String date,
                                    ModelMap modelMap) throws ParseException {
-        // Conversion de la date
         SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
         Date dateCreation = dateformat.parse(date);
-        universite.setDateCreation(dateCreation);
+        universiteDTO.setDateCreation(dateCreation);
 
-        universiteService.updateUniversite(universite);
-        List<Universite> universites = universiteService.getAllUniversites();
+        universiteService.updateUniversite(universiteDTO); // Mise à jour via le DTO
+        List<UniversiteDTO> universites = universiteService.getAllUniversites();
         modelMap.addAttribute("universites", universites);
         return "listeUniversites";
     }
+
     
 	@GetMapping(value = "/")
 	public String welcome() {

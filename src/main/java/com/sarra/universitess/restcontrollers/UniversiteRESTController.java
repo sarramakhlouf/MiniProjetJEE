@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sarra.universitess.dto.UniversiteDTO;
 import com.sarra.universitess.entities.Universite;
 import com.sarra.universitess.service.UniversiteService;
 
@@ -22,23 +23,23 @@ public class UniversiteRESTController {
 	UniversiteService universiteService;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public List<Universite> getAllUniversites() {
+	public List<UniversiteDTO> getAllUniversites() {
 		return universiteService.getAllUniversites();
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public Universite getUniversiteById(@PathVariable("id") Long id) {
+	public UniversiteDTO getUniversiteById(@PathVariable("id") Long id) {
 		return universiteService.getUniversite(id);
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public Universite createUniversite(@RequestBody Universite universite) {
-		return universiteService.saveUniversite(universite);
+	public UniversiteDTO createUniversite(@RequestBody UniversiteDTO universiteDTO) {
+		return universiteService.saveUniversite(universiteDTO);
 	}
 
 	@RequestMapping(method = RequestMethod.PUT)
-	public Universite updateUniversite(@RequestBody Universite universite) {
-		return universiteService.updateUniversite(universite);
+	public UniversiteDTO updateUniversite(@RequestBody UniversiteDTO universiteDTO) {
+		return universiteService.updateUniversite(universiteDTO);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
